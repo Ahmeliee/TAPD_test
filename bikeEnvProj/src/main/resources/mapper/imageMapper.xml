@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.Dao.imageDao">
+
+    <resultMap type="java.util.Map" id="imgResultMap" >
+        <result  property="Image" column="Image" jdbcType="BLOB"  typeHandler="org.apache.ibatis.type.BlobTypeHandler"/>
+    </resultMap>
+
+    <select id="get_image" resultType="com.example.demo.beans.image" >
+		SELECT * FROM Images WHERE Image_Name like '${Filename}%'
+      </select>
+    <select id="get_name" resultType="String" >
+		SELECT Image_Name FROM Images WHERE Image_Id=#{Image_Id}
+      </select>
+    <select id="get_all" resultType="String" >
+		SELECT Image_Name FROM Images
+      </select>
+</mapper>

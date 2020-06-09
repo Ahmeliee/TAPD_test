@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.Dao.ScoreResultDao">
+
+    <!--用户登录验证-->
+    <select id="select_score"  resultType="com.example.demo.beans.ScoreResult">
+        SELECT * FROM Manual_Scoring_Results WHERE Filename like '${Filename}%'
+    </select>
+    <select id="select_all"  resultType="String">
+        SELECT Filename FROM Manual_Scoring_Results
+    </select>
+    <select id="select_location_by_beauty"  resultType="String">
+        SELECT Filename FROM Manual_Scoring_Results WHERE Beauty=#{score}
+    </select>
+    <select id="select_location_by_sec"  resultType="String">
+        SELECT Filename FROM Manual_Scoring_Results WHERE Security=#{score}
+    </select>
+    <select id="select_location_by_comf"  resultType="String">
+        SELECT Filename FROM Manual_Scoring_Results WHERE Comfort=#{score}
+    </select>
+    <select id="select_location_by_faci"  resultType="String">
+        SELECT Filename FROM Manual_Scoring_Results WHERE Facility_availability=#{score}
+    </select>
+    <select id="select_location_by_total"  resultType="String">
+        SELECT Filename FROM Manual_Scoring_Results WHERE cast(Beauty as decimal(10, 2))+cast(Security as decimal(10, 2))+cast(Comfort as decimal(10, 2))+cast(Facility_availability as decimal(10, 2))>=#{score_a} and cast(Beauty as decimal(10, 2))+cast(Security as decimal(10, 2))+cast(Comfort as decimal(10, 2))+cast(Facility_availability as decimal(10, 2)) &lt;= #{score_b}
+    </select>
+</mapper>
