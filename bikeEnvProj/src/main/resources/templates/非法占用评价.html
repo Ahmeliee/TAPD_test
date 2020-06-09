@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8" />
+<meta name="keywords" content="百度地图,百度地图API，百度地图自定义工具，百度地图所见即所得工具" />
+<meta name="description" content="百度地图API自定义地图，帮助用户在可视化操作下生成百度地图" />
+<meta http-equiv="Content-Type" content="text/html; charset=uft-8" />
+<title>非法占用评价</title>
+<!--引用百度地图API-->
+<style type="text/css">
+    html,body{margin:0;padding:0;}
+    .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+    .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+<link
+    href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"
+    rel="stylesheet" />
+</head>
+<body>
+    <!--背景图-->
+    <img src="u1.gif" style="width:423px; height:695px; opacity:0.6;position:relative;z-index:-1;"/>
+    <!--标题（图标+中英文）-->
+    <img src="u2.svg" style="position:absolute;left:20px;top:30px;width:80px;height:80px;opacity:0.7;"/>
+    <div style="position:absolute;left:110px;top:23px;font-family:'华文宋体 Bold', '华文宋体', sans-serif;font-size:48px;">非法占用评价</div>
+    <div style="position:absolute;left:105px;top:80px;font-family:'Century Bold', 'Century Normal', 'Century', sans-serif;font-size:24px;">Illegal Occupate Evaluate</div>
+    <!--左侧表单左侧表单左侧表单左侧表单左侧表单-->
+    <!--选择图片-->
+    <form action="" method="" enctype='multipart/form-data'>
+        <!--用label掩饰input-->
+        <label for='my_file' class='inputlabelBox' style="position:absolute;left:20px;top:140px;width:384px;height:40px;background-color:rgba(22, 130, 213, 1);border-width:0px;border-width:0px;">
+            <div class="inputBox" style="text-align: center;line-height: 40px;color: white;">选择文件</div>
+        </label>
+        <!--实际是input选择文件-->
+        <input type="file" id='my_file' style="display:none;" />
+    </form>
+    <script>
+        //选择图片，马上预览
+        my_file.onchange = function(){       
+            var inputlabelBox = document.querySelector('.inputlabelBox');
+            var my_file = document.querySelector('#my_file');
+            var img = document.querySelector('#xmTanImg'); 
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onload = function()
+            {
+                img.src = this.result;
+            }
+        }
+                    
+    </script>
+    <!--图片预览-->
+    <img id="xmTanImg"  style="position:absolute;left:20px;top:210px;width:384px;height:250px;"/>
+    <!--上传图片-->
+    <button type="button" class="btn btn-success btn-block" style="position:absolute;left:20px;top:490px;width:384px;height:40px;background-color:rgba(22, 130, 213, 1);border-width:0px;border-width:0px;"onclick="up_picture()">上传图片</button>
+    <script type="text/javascript">
+      var get_score=function(){
+        
+
+
+      }
+    </script>
+    <!--评价-->
+    <button type="button" class="btn btn-success btn-block" style="position:absolute;left:20px;top:560px;width:384px;height:40px;background-color:rgba(22, 130, 213, 1);border-width:0px;border-width:0px;"onclick="get_score()">评价</button>
+    <script type="text/javascript">
+      var get_score=function(){
+        score_result.value=11111;//在评分结果框内显示
+
+
+
+      }
+    </script>
+    <!--评价结果(只读)-->
+    <div style="position:absolute;left:20px;top:630px;height:40px;width:140px;font-family:'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;font-size:28px;text-align:center;">评价结果:</div>
+    <input id="score_result" type="text" readonly style="position:absolute;left:160px;top:630px;width:244px;height:40px;"/>
+    <!--右侧地图右侧地图右侧地图右侧地图右侧地图-->
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IOGly5nD9LA5uwilbbQhiD5HOhykGIQp"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js"></script>
+    <div style="position:absolute;left:423px;top:0px;width:943px;height:695px;border:#ccc solid 1px;" id="dituContent"></div>
+    <script type="text/javascript">
+        var map = new BMap.Map("dituContent");
+        var point = new BMap.Point(114.311586,30.598467);
+        map.centerAndZoom(point, 16);
+    
+        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard();
+        //启用键盘上下左右键移动地图
+        var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+        map.addControl(ctrl_nav);
+        //向地图中添加缩略图控件
+        var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+        map.addControl(ctrl_ove);
+        //向地图中添加比例尺控件
+        var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+        map.addControl(ctrl_sca);
+        //centre:椭圆中心点,X:横向经度,Y:纵向纬度
+        function create_oval(centre,x,y)
+        {
+            var assemble=new Array();
+            var angle;
+            var dot;
+            var tangent=x/y;
+            for(i=0;i<36;i++)
+            {
+                angle = (2* Math.PI / 36) * i;
+                dot = new BMap.Point(centre.lng+Math.sin(angle)*y*tangent, centre.lat+Math.cos(angle)*y);
+                assemble.push(dot);
+            }
+            return assemble;
+        }
+        function add_oval(x,y){
+            var oval = new BMap.Polygon(create_oval(new BMap.Point(x,y),0.001,0.001), {strokeColor:"red", strokeWeight:5, strokeOpacity:0.5});
+            map.addOverlay(oval);
+        }
+        add_oval(114.311586,30.598467);//画圆
+    </script>
+</body>
+</html>
